@@ -27,9 +27,21 @@ window.onload = function() {
 	camera.position.set(0,2,0,0.6);
 	
 	
-	var light = new THREE.PointLight(0xffffff,1,100);
-	light.position.set(0,4,0);
-	scene.add(light)
+	//var light = new THREE.PointLight(0xffffff,1,100);
+	//light.position.set(0,4,0);
+	//scene.add(light)
+
+	const targetObject = new THREE.Object3D();
+	targetObject.position.set(0,2,-20);
+	scene.add(targetObject);
+
+	const spot = new THREE.SpotLight( 0xffffff, 0.5 );
+	spot.target = targetObject
+	spot.castShadow = true;
+	scene.add(spot);
+	
+	const light = new THREE.AmbientLight( 0x404040 ); // soft white light
+	scene.add( light );
 	loader.load( 'mdl/map.glb', function ( gltf ) {
 		model = gltf.scene;
 		scene.add(gltf.scene);
@@ -40,9 +52,10 @@ window.onload = function() {
 	{	
 		var mx = (event.clientX-width/2)/width;
 		var my = (event.clientY-height/2)/height;
-		camera.rotation.x = sens*(-1*my);
-		camera.rotation.y = sens*(-1*mx);
-		camera.rotation.z = -1*(sens*my*sens*mx);
+		camera.rotation.y = -1*mx*Math.PI;
+
+		targetObject.position.set(mx*100,2,-20);
+
 		cx.innerHTML = camera.rotation.x;
 		cy.innerHTML = camera.rotation.y;
 		cz.innerHTML = camera.rotation.z;
