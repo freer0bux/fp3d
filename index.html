@@ -1,0 +1,32 @@
+<head>
+<style>
+body, canvas {
+	margin:0;
+	padding:0;
+}
+canvas {
+	pointer-events:none;
+	z-index: 10;
+	position:absolute;
+}
+#debug {
+	z-index: 11;
+	position:absolute;
+}
+</style>
+<script src='./script.js'></script>
+<script src='./three.min.js'></script>
+<script src='./GLTFLoader.js'></script>
+
+</head>
+
+<body>
+<canvas id='canvas'></canvas>
+<div id="debug">
+<p id="cx"></p>
+<p id="cy"></p>
+<p id="cz"></p>
+<p id="mx"></p>
+<p id="my"></p>
+</div>
+</body>
